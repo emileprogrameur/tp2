@@ -6,6 +6,7 @@ const bodyParser= require('body-parser');
 const MongoClient = require('mongodb').MongoClient; // le pilote MongoDB
 const ObjectID = require('mongodb').ObjectID;
 const i18n = require("i18n")
+const cookieParser = require('cookie-parser')
 app.use(bodyParser.urlencoded({extended: true}));
 /* on associe le moteur de vue au module «ejs» */
 app.use(express.static('public'));
@@ -21,6 +22,8 @@ i18n.configure({
 /* Ajoute l'objet i18n à l'objet global «res» */
 app.use(i18n.init);
 
+
+app.use(cookieParser())
 
 let db // variable qui contiendra le lien sur la BD
 
@@ -47,7 +50,8 @@ app.set('view engine', 'ejs'); // générateur de template
 
 app.get("/:locale(en|fr)", (req,res)=>{
 
-	res.setLocale(req.params.locale)
+	res.cookie('langueChoisie' , req.params.locale)
+	//res.setLocale(req.params.locale)
 	console.log('en= ' + res.__('bonjour'))
 	console.log(res.__("maison"))
 
