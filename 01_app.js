@@ -7,6 +7,7 @@ const MongoClient = require('mongodb').MongoClient; // le pilote MongoDB
 const ObjectID = require('mongodb').ObjectID;
 const i18n = require("i18n")
 const cookieParser = require('cookie-parser')
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
 /* on associe le moteur de vue au module «ejs» */
 app.use(express.static('public'));
@@ -57,7 +58,7 @@ app.get("/:locale(en|fr)", (req,res)=>{
 	console.log(res.__('bonjour'))
 	console.log(res.__("maison"))
 
-	
+
 
 	res.render('accueil.ejs')
 
@@ -74,7 +75,32 @@ app.get('/', function (req, res) {
 
 //////////////////////////////////////////
 
+app.post('/ajax_modifier', (req,res) => {
+   console.log("La route = /ajax_modifier")
+   req.body._id = ObjectID(req.body._id)
 
+   db.collection('adresse').save(req.body, (err, result) => {
+   if (err) return console.log(err)
+       console.log('sauvegarder dans la BD')
+   res.send(JSON.stringify(req.body));
+   // res.status(204)
+   })
+})
+
+//////////////////////////////////////////
+
+app.get('/ajax_detruire/:id', (req, res) => {
+ console.log('route /detruire')
+ // console.log('util = ' + util.inspect(req.params));	
+ let id = req.params.id
+ console.log(id)
+ db.collection('adresse')
+ .findOneAndDelete({"_id": ObjectID(req.params.id)}, (err, resultat) => {
+
+if (err) return console.log(err)
+ res.send(JSON.stringify({"_id":ObjectID(req.params.id)}))
+ })
+})
 
 //////////////////////////////////////////  Route Adresse
 app.get('/adresse', function (req, res) {
