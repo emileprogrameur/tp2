@@ -1,4 +1,11 @@
 {
 	"bonjour": "Bonjour",
-	"maison": "Maison"
+	"maison": "Maison",
+	"courriel": "Courriel",
+	"accueil": "Accueil",
+	"vider": "Vider",
+	"adresse": "Adresse",
+	"nom": "Nom",
+	"prenom": "Prénom",
+	"telephone": "Téléphone"
 }

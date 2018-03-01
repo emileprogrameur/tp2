@@ -1,8 +1,24 @@
+<%
 
+let langue =""
+let langueText =""
+
+if(getLocale()=="fr")
+	{
+		langue="en"
+		langueText="English"
+	} 
+	else 
+	{
+		langue="fr"
+		langueText="Français"
+	}
+%>
 <div class="global couleur-entete">
     <header class='entete'>
         <h1>Projet Veille Node.js</h1>
         <h2>Tim - Collège de Maisonneuve</h2>
+        <a href="/<%= langue %>"><%= langueText %></a>
     </header>
 </div>
 

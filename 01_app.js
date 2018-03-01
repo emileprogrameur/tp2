@@ -19,11 +19,13 @@ i18n.configure({
 
 })
 
+app.use(cookieParser())
+
 /* Ajoute l'objet i18n à l'objet global «res» */
 app.use(i18n.init);
 
 
-app.use(cookieParser())
+
 
 let db // variable qui contiendra le lien sur la BD
 
@@ -55,6 +57,8 @@ app.get("/:locale(en|fr)", (req,res)=>{
 	console.log(res.__('bonjour'))
 	console.log(res.__("maison"))
 
+	
+
 	res.render('accueil.ejs')
 
 })
@@ -62,9 +66,13 @@ app.get("/:locale(en|fr)", (req,res)=>{
 //////////////////////////////////////////
 app.get('/', function (req, res) {
 
+ console.log("req.cookies.langueChoisie = " + req.cookies.langueChoisie)
+ console.log(res.__("courriel"))	
  res.render('accueil.ejs')  
  
   });
+
+//////////////////////////////////////////
 
 
 
