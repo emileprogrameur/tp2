@@ -2,11 +2,14 @@ const express = require('express');
 const fs = require('fs');
 const util = require("util");
 const app = express();
+const server = require('http').createServer(app);
+const io = require('./mes_modules/chat_socket').listen(server);
 const bodyParser= require('body-parser');
 const MongoClient = require('mongodb').MongoClient; // le pilote MongoDB
 const ObjectID = require('mongodb').ObjectID;
 const i18n = require("i18n")
 const cookieParser = require('cookie-parser')
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
 /* on associe le moteur de vue au module «ejs» */
@@ -181,7 +184,7 @@ app.get('/vider', (req, res) => {
 //////////////////////////////////////////////////////// Route chat
 app.get('/chat', (req, res) => {
 
-	
+
 	
 	res.render('socket_vue.ejs')
 })

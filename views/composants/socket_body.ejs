@@ -4,7 +4,17 @@
  <button onclick="enregistrement()"><%= __("login") %></button>
 </section>
 
+<section class="chat" style="display:none">
+	
+	<table id="list_user"></table>
+	<table id="message"></table>
+	<section id="message_a_transmettre">
+		
+		<input type="text" name="txtMessage"><button><%= __("send") %></button>
 
+	</section>
+
+</section>
 
 <script type="text/javascript">
  /* 
