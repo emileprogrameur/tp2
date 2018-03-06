@@ -102,18 +102,18 @@
             xhr.send(sData);
             xhr.ligne = laLigne;
             xhr.addEventListener("readystatechange", effacerRequest, false);
-        })
-    }
-
-    function effacerRequest(e) {
-        console.log("effacer", e.target.ligne);
-        console.log("xhr.readyState = " + xhr.readyState)
-        console.log("xhr.status = " + xhr.status)
-        if(xhr.readyState == 4 && xhr.status == 200) {
-            e.target.ligne.parentNode.removeChild(e.target.ligne)
-            console.log(xhr.responseText);
+            })
         }
-    }
+
+            function effacerRequest(e) {
+                console.log("effacer", e.target.ligne);
+                console.log("xhr.readyState = " + xhr.readyState)
+                console.log("xhr.status = " + xhr.status)
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    e.target.ligne.parentNode.removeChild(e.target.ligne)
+                    console.log(xhr.responseText);
+                }
+            }
 
 </script>
 

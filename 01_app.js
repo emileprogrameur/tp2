@@ -98,7 +98,7 @@ app.post('/ajax_detruire', (req, res) => {
   db.collection('adresse').findOneAndDelete({_id: ObjectID(id)}, (err, resultat) => {
   	if (err) return console.log(err)
   	console.log(id)
-  	res.send("élément détruit");
+  	res.send("éléement détruit");
   })
 })
 
