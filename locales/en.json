@@ -7,5 +7,7 @@
 	"adresse": "Address",
 	"nom": "Last Name",
 	"prenom": "First Name",
-	"telephone": "Phone"
+	"telephone": "Phone",
+	"peupler": "Fill",
+	"chat": "Chat"
 }

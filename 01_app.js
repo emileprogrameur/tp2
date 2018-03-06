@@ -178,4 +178,11 @@ app.get('/vider', (req, res) => {
 	res.redirect('/adresse')
 })
 
+//////////////////////////////////////////////////////// Route chat
+app.get('/chat', (req, res) => {
+
+	
+	
+	res.render('socket_vue.ejs')
+})
 
