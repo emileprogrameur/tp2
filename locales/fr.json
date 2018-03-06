@@ -9,5 +9,7 @@
 	"prenom": "Prénom",
 	"telephone": "Téléphone",
 	"peupler": "Peupler",
-	"chat": "Clavardage"
+	"chat": "Clavardage",
+	"login": "Connexion",
+	"send": "Envoyer"
 }

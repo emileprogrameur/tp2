@@ -86,7 +86,34 @@
             
         }
 
+        let elmErase = document.querySelectorAll('.erase')
+        for (elm of elmErase) {
+            elm.addEventListener('click', function() {
+            let laLigne = this.parentNode.parentNode
+            console.log(laLigne.tagName)
+            let id = laLigne.children[0].innerHTML
+            xhr = new XMLHttpRequest();
+            xhr.open('POST', "/ajax_detruire", true);
+            data = {
+                "_id" : id
+            }
+            sData = JSON.stringify(data);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.send(sData);
+            xhr.ligne = laLigne;
+            xhr.addEventListener("readystatechange", effacerRequest, false);
+        })
+    }
 
+    function effacerRequest(e) {
+        console.log("effacer", e.target.ligne);
+        console.log("xhr.readyState = " + xhr.readyState)
+        console.log("xhr.status = " + xhr.status)
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            e.target.ligne.parentNode.removeChild(e.target.ligne)
+            console.log(xhr.responseText);
+        }
+    }
 
 </script>
 

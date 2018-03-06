@@ -9,5 +9,7 @@
 	"prenom": "First Name",
 	"telephone": "Phone",
 	"peupler": "Fill",
-	"chat": "Chat"
+	"chat": "Chat",
+	"login": "Login",
+	"send": "Send"
 }

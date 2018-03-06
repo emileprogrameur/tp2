@@ -9,6 +9,7 @@ const MongoClient = require('mongodb').MongoClient; // le pilote MongoDB
 const ObjectID = require('mongodb').ObjectID;
 const i18n = require("i18n")
 const cookieParser = require('cookie-parser')
+const Peupler = require('./public/data/peupler')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
@@ -92,17 +93,13 @@ app.post('/ajax_modifier', (req,res) => {
 
 //////////////////////////////////////////
 
-app.get('/ajax_detruire/:id', (req, res) => {
- console.log('route /detruire')
- // console.log('util = ' + util.inspect(req.params));	
- let id = req.params.id
- console.log(id)
- db.collection('adresse')
- .findOneAndDelete({"_id": ObjectID(req.params.id)}, (err, resultat) => {
-
-if (err) return console.log(err)
- res.send(JSON.stringify({"_id":ObjectID(req.params.id)}))
- })
+app.post('/ajax_detruire', (req, res) => {
+	let id = req.body._id
+  db.collection('adresse').findOneAndDelete({_id: ObjectID(id)}, (err, resultat) => {
+  	if (err) return console.log(err)
+  	console.log(id)
+  	res.send("élément détruit");
+  })
 })
 
 //////////////////////////////////////////  Route Adresse
@@ -180,6 +177,16 @@ app.get('/vider', (req, res) => {
 		})
 	res.redirect('/adresse')
 })
+
+//////////////////////////////////////////////////////// Route Peupler
+app.get('/peupler', (req, res) => {
+	let resultat = Peupler();
+	db.collection('adresse').insert(resultat, (err, result) => {
+		if (err) return console.log(err);
+		res.redirect('/adresse')
+	})
+})
+
 
 //////////////////////////////////////////////////////// Route chat
 app.get('/chat', (req, res) => {
