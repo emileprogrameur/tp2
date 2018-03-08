@@ -1,0 +1,30 @@
+#titre {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+#enregistrement {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+#chat {
+  display: flex;
+  padding: 20px;
+}
+#chat #list_user {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid black;
+}
+#chat #message {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid black;
+  width: 60%;
+}
+#chat #message_a_transmettre {
+  padding: 10px;
+}

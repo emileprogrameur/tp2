@@ -1,4 +1,4 @@
-<h2><%= __("chat") %></h2>
+<h2 id="titre"><%= __("chat") %></h2>
 <section id="enregistrement">
  <input type="text">
  <button onclick="enregistrement()"><%= __("login") %></button>
@@ -109,8 +109,9 @@ function afficheTableauUsers(data){
 function afficherMessage(data, couleur){
 	let elmTr = document.createElement("TR")
 	
-	let sMessage="<td>" + data.user  +"</td>"
-				+"<td style='backgroundColor="+ couleur +"'>" + data.message  +"</td>"
+	let sMessage="<td style='background-color:"+ couleur +";'>" + data.user  +"</td>"
+				+"<td>==></td>"
+				+"<td>" + data.message  +"</td>"
 	
 	elmTr.innerHTML=sMessage				
 
