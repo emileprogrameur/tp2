@@ -19,7 +19,7 @@ module.exports.listen = function(server){
     	})
     	///////////////////////////////////////traitement des messages
     	socket.on("setMessage", function(data){
-
+    		data.user = objUtilisateur[socket.id]
     		console.log("message reçu = " + util.inspect(data))
     		socket.broadcast.emit("diffuser_message", data)
     		socket.emit("valide_message", data)

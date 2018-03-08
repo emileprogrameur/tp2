@@ -6,7 +6,7 @@
 
 <section id="chat" style="display:none">
 	
-	<table id="list_user"></table>
+	<table id="list_user"></table><br>
 	<table id="message"></table>
 	<section id="message_a_transmettre">
 		
@@ -106,9 +106,17 @@ function afficheTableauUsers(data){
 
 ////////////////////////////////////////////////////////Affiche les messages
 
-function afficherMessage(data){
-
+function afficherMessage(data, couleur){
+	let elmTr = document.createElement("TR")
 	
+	let sMessage="<td>" + data.user  +"</td>"
+				+"<td style='backgroundColor="+ couleur +"'>" + data.message  +"</td>"
+	
+	elmTr.innerHTML=sMessage				
+
+	let elmMessage = document.getElementById("message")
+	
+	elmMessage.appendChild(elmTr)
 
 }
 
