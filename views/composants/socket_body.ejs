@@ -4,7 +4,7 @@
  <button onclick="enregistrement()"><%= __("login") %></button>
 </section>
 
-<section class="chat" style="display:none">
+<section id="chat" style="display:none">
 	
 	<table id="list_user"></table>
 	<table id="message"></table>
@@ -23,17 +23,47 @@ Pour établir une communication socket il faut un premier appel de
  Cette fonction est incluse dans la librairie socket.io. 
  Cette fonction déclenche un événement connect vers le serveur
  */
+ let socket
  window.onload = ()=>{
  socket = io()
  console.log(socket.id);
+
  socket.on('connect', function(){
- console.log('Le socket id = ' + socket.id); 
- /* l'événement ackUser a été transmis par le serveur */ 
- socket.on('ackUser', function(data){
- console.log('data en provenance du serveur = ' + data.user)
- })
+	 
+	 console.log('Le socket id = ' + socket.id); 
+	 /* l'événement ackUser a été transmis par le serveur */ 
+	 
+	 socket.on('valide_user', function(data){
+	 	console.log('data en provenance du serveur = ' + data.user)
+	 	let elmEnregistrement = document.getElementById("enregistrement")
+	 	elmEnregistrement.style.display="none"
+	 	let elmChat=document.getElementById("chat")
+	 	elmChat.style.display="flex"
+
+	 })
+	 
+	 socket.on("diffuser_list_user", function(data){
+
+	 	let sChaine=""
+	 	for(id in data)
+	 	{
+
+	 		sChaine +="<tr>"
+	 				+"<td>" + id + "</td>"
+	 				+"<td>" + data[id] + "</td>"
+	 				+"</tr>"
+
+	 	}
+	 	let elmListUser = document.getElementById("list_user")
+	 	elmListUser.innerHTML=sChaine
+
+	 })
+
+
  });
  }
+
+
 /* ---------------------------------------------------------- */
  function enregistrement(){
  var elmUser = document.querySelector('#enregistrement input')
