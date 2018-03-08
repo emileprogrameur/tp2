@@ -10,7 +10,7 @@
 	<table id="message"></table>
 	<section id="message_a_transmettre">
 		
-		<input type="text" name="txtMessage"><button><%= __("send") %></button>
+		<input type="text" name="txtMessage"><button onclick="transmettreMessage()"><%= __("send") %></button>
 
 	</section>
 
@@ -44,7 +44,52 @@ Pour établir une communication socket il faut un premier appel de
 	 
 	 socket.on("diffuser_list_user", function(data){
 
-	 	let sChaine=""
+	 	afficheTableauUsers(data)
+
+	 })
+
+	 socket.on("valide_message", function(data){
+
+	 	console.log("valide_message = " + data)
+	 	afficherMessage(data, "#0f0")
+
+	 })
+
+	 socket.on("diffuser_message", function(data){
+
+	 	console.log("diffuser_message = " + data)
+	 	afficherMessage(data, "#00f")
+
+	 })
+
+ });
+ }
+
+
+////////////////////////////////////////////////////////
+
+ function enregistrement(){
+	 let elmUser = document.querySelector('#enregistrement input')
+	 console.log(elmUser.value)
+	 /* l'événement « setUser » est transmit avec un objet 
+	 */
+	 socket.emit('setUser', {user : elmUser.value})
+ }
+
+////////////////////////////////////////////////////////Transmettre un message
+
+function transmettreMessage(){
+	 let elmMessage = document.querySelector('#message_a_transmettre input')
+	 console.log(elmMessage.value)
+	 
+	 socket.emit('setMessage', {message : elmMessage.value})
+ } 
+
+//////////////////////////////////////////////////////// Afficher tableau users
+
+function afficheTableauUsers(data){
+
+	let sChaine=""
 	 	for(id in data)
 	 	{
 
@@ -57,19 +102,14 @@ Pour établir une communication socket il faut un premier appel de
 	 	let elmListUser = document.getElementById("list_user")
 	 	elmListUser.innerHTML=sChaine
 
-	 })
+}
 
+////////////////////////////////////////////////////////Affiche les messages
 
- });
- }
+function afficherMessage(data){
 
+	
 
-/* ---------------------------------------------------------- */
- function enregistrement(){
- var elmUser = document.querySelector('#enregistrement input')
- console.log(elmUser.value)
- /* l'événement « setUser » est transmit avec un objet 
- */
- socket.emit('setUser', {user : elmUser.value})
- }
+}
+
 </script>

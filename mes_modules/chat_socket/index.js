@@ -17,6 +17,21 @@ module.exports.listen = function(server){
     		io.sockets.emit("diffuser_list_user", objUtilisateur)
 
     	})
+    	///////////////////////////////////////traitement des messages
+    	socket.on("setMessage", function(data){
+
+    		console.log("message reçu = " + util.inspect(data))
+    		socket.broadcast.emit("diffuser_message", data)
+    		socket.emit("valide_message", data)
+
+    	})
+
+    	socket.on("disconnect", function(){
+
+    		delete objUtilisateur[socket.id]
+    		io.sockets.emit("diffuser_list_user", objUtilisateur)
+
+    	})
 
    })
  return io
